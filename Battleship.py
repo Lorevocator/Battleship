@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 A11 = ["  ", "A11", "  "]
 A12 = ["  ", "A12", "  "]
