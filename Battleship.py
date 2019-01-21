@@ -337,7 +337,7 @@ shipsp2 = [S21, S22, S23, S24, S25]
 
 def roundis(player):
 	i = 0
-	did = 0
+	did = false
 	while i == 0:
 		printboard(1, 0)
 		printboard(2, 2)
@@ -345,9 +345,9 @@ def roundis(player):
 		action = input().upper()
 
 		if action == "S":
-			if did == 1:
+			if did:
 				print("You've already shot!")
-			elif did == 0:
+			else:
 				printboard(2, 2)
 				loc = input("Where do you want to shoot? (Example: F9)\n").upper()
 				if len(loc) != 2 or loc[0] + "2" + loc[1] not in [item[1] for item in board2]:
@@ -360,13 +360,13 @@ def roundis(player):
 								print("Yes! Got ya!")
 								box[2] = "██"
 								box[0] = "▓▓"
-								did = 1
+								did = true
 							elif box[2] == "██" or box[2] == "░░":
 								print("You've already shot here!")
 							elif box[0] == "  ":
 								print("Ooops... You missed! Better luck next time.")
 								box[2] = "░░"
-								did = 1
+								did = true
 							time.sleep(2)
 				elif player == p2:
 					for box in board1:
@@ -375,13 +375,13 @@ def roundis(player):
 								print("Yes! Got ya!")
 								box[2] = "██"
 								box[0] = "▓▓"
-								did = 1
+								did = true
 							elif box[2] == "██" or box[2] == "░░":
 								print("You've already shot here!")
 							elif box[0] == "  ":
 								print("Ooops... You missed! Better luck next time.")
 								box[2] = "░░"
-								did = 1
+								did = true
 							time.sleep(2)
 
 		elif action == "M":
@@ -413,9 +413,9 @@ def roundis(player):
 			exit()
 
 		elif action == "P":
-			if did == 0:
+			if !did:
 				print("You did nothing!")
-			if did == 1:
+			else:
 				print("Bye then")
 				i = 1
 
@@ -442,7 +442,7 @@ input("")
 check(p1)
 printboard(1, 0)
 print("\n", p1, ", this is your board!", sep="")
-input("I have randomly placed your five ships, but you can move and rotate each one of them as you'd like.\n")
+input("I have placed your five ships, but you can move and rotate each one of them as you'd like.\n")
 ready = "N"
 while ready == "N":
 	check(p1)
@@ -460,28 +460,28 @@ while ready == "N":
 				if board1.index(shipsp1[num][0]) < 10:
 					printboard(1, 0)
 					print(shipsp1[num])
-					mov = input("Can't go there!\n")
+					mov = input("Can't go there!\n").upper()
 				shipsp1[num][shipsp1[num].index(piece)] = board1[board1.index(piece)-10]
 				print(shipsp1[num])
 			if mov == "S":
 				if board1.index(shipsp1[num][-1]) > 90:
 					printboard(1, 0)
-					mov = input("Can't go there!\n")
+					mov = input("Can't go there!\n").upper()
 				shipsp1[num][shipsp1[num].index(piece)] = board1[board1.index(piece)+10]
 			if mov == "A":
 				if board1.index(shipsp1[num][0]) == 1 or str(board1.index(shipsp1[0]))[1] == 1:
 					printboard(1, 0)
-					mov = input("Can't go there!\n")
+					mov = input("Can't go there!\n").upper()
 				shipsp1[num][shipsp1[num].index(piece)] = board1[board1.index(piece)-1]
 			if mov == "D":
 				if len(str(board1.index(shipsp1[num][-1]))) == 2 and str(board1.index(shipsp1[num][-1]))[1] == "0":
 					printboard(1, 0)
-					mov = input("Can't go there!\n")
+					mov = input("Can't go there!\n").upper()
 				shipsp1[num][shipsp1[num].index(piece)] = board1[board1.index(piece)+1]
 		check(p1)
 		printboard(1, 0)
-		movit = input("\n\nDo you want to move it again? (y/n)\n")
-	ready = input("Are you ready to play? (y/n)\n")
+		movit = input("\n\nDo you want to move it again? (y/n)\n").upper()
+	ready() = input("Are you ready to play? (y/n)\n").upper()
 
 roundis(p1)
 printboard(1, 0)
